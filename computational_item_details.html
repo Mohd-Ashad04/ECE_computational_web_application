@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECE Computational Database - Computational Item Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        nav {
+            background-color:#09396d;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center; 
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .section p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            color: #666;
+        }
+
+        form {
+            text-align: left; 
+            max-width: 300px; 
+            margin: 0 auto; 
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            text-align: left; /* Align labels to the left */
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: #2990fd;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="computational_item_details.html">Computational Details</a>
+        <a href="aboutece.html">About ECE Computational Data</a>
+        <a href="faculty_details.html">Faculty Details</a>
+        <a href="lab_details.html">ECE Lab Details</a> 
+        <a href="lab_incharge.html">ECE Lab Incharges</a> 
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign up</a>
+    </nav>
+    <div class="container">
+        <h2>ECE Computational Database</h2>
+        <h3>Fill ECE computational details</h3>
+        <p>Enter computational item details:</p>
+        <form id="computationalDetailsForm" method="POST">
+            <label for="roomNo">Room No:</label>
+            <input type="text" id="roomNo" name="roomNo" required><br>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="laptopModel">Laptop Model:</label>
+            <input type="text" id="laptopModel" name="laptopModel"><br>
+
+            <label for="pcModel">PC Model:</label>
+            <input type="text" id="pcModel" name="pcModel"><br>
+
+            <label for="printerModel">Printer Model:</label>
+            <input type="text" id="printerModel" name="printerModel"><br>
+
+            <label for="tabletModel">Graphic Tablet Model:</label>
+            <input type="text" id="tabletModel" name="tabletModel"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('computationalDetailsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (validateForm()) {
+                submitForm();
+            }
+        });
+
+        function validateForm() {
+            var roomNo = document.getElementById('roomNo').value;
+            var name = document.getElementById('name').value;
+
+            if (roomNo.trim() === '' || name.trim() === '') {
+                alert('Room No and Name fields are required');
+                return false;
+            }
+
+            return true; 
+        }
+
+        function submitForm() {
+            var form = document.getElementById('computationalDetailsForm');
+            var formData = new FormData(form);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open(form.method, form.action, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert('Form submitted successfully!');
+                        form.reset(); // Clear the form
+                    } else {
+                        alert('Error occurred while submitting the form.');
+                    }
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+</body>
+</html>

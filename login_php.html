@@ -1,0 +1,25 @@
+<?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if both email and password are set
+    if (isset($_POST["email"]) && isset($_POST["password"])) {
+        // Retrieve email and password from the form data
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+        // Now you can process the email and password as needed, such as checking against a database
+
+        // For demonstration purposes, let's just print them
+        echo "Email: " . $email . "<br>";
+        echo "Password: " . $password . "<br>";
+
+        // You can add your own logic here, such as database queries to verify the login details
+    } else {
+        // If email or password is not set, show an error message
+        echo "Email and password are required.";
+    }
+} else {
+    // If the form is not submitted via POST method, show an error message
+    echo "Form submission method not allowed.";
+}
+?>

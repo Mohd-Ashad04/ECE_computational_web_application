@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECE Computational Database - Sign Up</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            background-color: #09396d;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form > * {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="computational_item_details.html">Computational Details</a>
+        <a href="aboutece.html">About ECE Computational Data</a>
+        <a href="faculty_details.html">Faculty Details</a>
+        <a href="lab_details.html">ECE Lab Details</a>
+        <a href="lab_incharge.html">ECE Lab Incharges</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign up</a>
+    </nav>
+    <div class="form-container">
+        <form id="signupForm" action="process_signup.php" method="POST">
+            <h2>ECE Computational Database - Sign Up</h2>
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" name="confirmPassword" required>
+
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const name = formData.get('name').trim();
+            const email = formData.get('email').trim();
+            const password = formData.get('password').trim();
+            const confirmPassword = formData.get('confirmPassword').trim();
+
+            if (name === '') {
+                alert('Please enter your name.');
+                return;
+            }
+
+            if (email === '') {
+                alert('Please enter your email.');
+                return;
+            }
+
+            if (password === '') {
+                alert('Please enter a password.');
+                return;
+            }
+
+            if (confirmPassword === '') {
+                alert('Please confirm your password.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', form.action, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert('Sign up successful!');
+                    form.reset();
+                } else {
+                    alert('Error: ' + xhr.statusText);
+                }
+            };
+            xhr.onerror = function() {
+                alert('Request failed.');
+            };
+            xhr.send(formData);
+        });
+    </script>
+</body>
+</html>
